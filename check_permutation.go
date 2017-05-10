@@ -4,7 +4,9 @@ import (
 	"fmt"
 )
 
-func IsPermutation(sample, source string) bool {
+// Check Permutation: Given two strings,write a method to decide if one is a
+// permutation of the other.
+func CheckPermutation(sample, source string) bool {
 	counter := make(map[rune]int)
 	for _, c := range sample {
 		if _, ok := counter[c]; ok {
