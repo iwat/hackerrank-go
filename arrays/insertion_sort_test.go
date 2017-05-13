@@ -3,20 +3,19 @@ package arrays
 import (
 	"math/rand"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestInsertionSort(t *testing.T) {
 	samples := generateSamples(20)
 	InsertionSort(samples)
-	verifySorted(samples, t)
+	assertSorted(t, samples)
 }
 
-func verifySorted(samples []int, t *testing.T) {
+func assertSorted(t *testing.T, samples []int) {
 	for i := 1; i < len(samples); i++ {
-		if samples[i] < samples[i-1] {
-			t.Log(samples)
-			t.Fatal("Bad result")
-		}
+		assert.True(t, samples[i] >= samples[i-1])
 	}
 }
 

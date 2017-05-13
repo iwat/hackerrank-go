@@ -2,13 +2,11 @@ package arrays
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestIsUnique(t *testing.T) {
-	if IsUnique("the quick brown fox jumps over the lazy dog") {
-		t.Fatal("Spaces is not unique")
-	}
-	if !IsUnique("thequickbrownfxjmpsvlazydg") {
-		t.Fatal("It must be unique")
-	}
+	assert.False(t, IsUnique("the quick brown fox jumps over the lazy dog"), "Spaces is not unique")
+	assert.True(t, IsUnique("thequickbrownfxjmpsvlazydg"), "It must be unique")
 }

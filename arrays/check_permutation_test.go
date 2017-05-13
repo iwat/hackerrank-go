@@ -2,23 +2,14 @@ package arrays
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestCheckPermutation(t *testing.T) {
-	assertPermutation("abcdefg", "gfedcba", t)
-	refutePermutation("abcdefg", "gfedcb", t)
-	assertPermutation("abcdefgabcdefg", "gfedcbagfedcba", t)
-	refutePermutation("abcdefgabcdefg", "gfedcb", t)
-}
-
-func assertPermutation(sample, source string, t *testing.T) {
-	if !CheckPermutation(sample, source) {
-		t.Fatal("assert", sample, source)
-	}
-}
-
-func refutePermutation(sample, source string, t *testing.T) {
-	if CheckPermutation(sample, source) {
-		t.Fatal("refute", sample, source)
-	}
+	assert.True(t, CheckPermutation("abcdefg", "gfedcba"))
+	assert.True(t, CheckPermutation("abcdefg", "gfedcba"))
+	assert.False(t, CheckPermutation("abcdefg", "gfedcb"))
+	assert.True(t, CheckPermutation("abcdefgabcdefg", "gfedcbagfedcba"))
+	assert.False(t, CheckPermutation("abcdefgabcdefg", "gfedcb"))
 }

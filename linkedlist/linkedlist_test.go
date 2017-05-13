@@ -9,21 +9,21 @@ import (
 func TestCreate(t *testing.T) {
 	head := Create("a", "b", "c", "d", "e", "f", "g", "h")
 
-	assert.Equal(t, head.Value, "a")
+	assert.Equal(t, "a", head.Value)
 	head = head.Next
-	assert.Equal(t, head.Value, "b")
+	assert.Equal(t, "b", head.Value)
 	head = head.Next
-	assert.Equal(t, head.Value, "c")
+	assert.Equal(t, "c", head.Value)
 	head = head.Next
-	assert.Equal(t, head.Value, "d")
+	assert.Equal(t, "d", head.Value)
 	head = head.Next
-	assert.Equal(t, head.Value, "e")
+	assert.Equal(t, "e", head.Value)
 	head = head.Next
-	assert.Equal(t, head.Value, "f")
+	assert.Equal(t, "f", head.Value)
 	head = head.Next
-	assert.Equal(t, head.Value, "g")
+	assert.Equal(t, "g", head.Value)
 	head = head.Next
-	assert.Equal(t, head.Value, "h")
+	assert.Equal(t, "h", head.Value)
 	head = head.Next
 	assert.Nil(t, head)
 }
