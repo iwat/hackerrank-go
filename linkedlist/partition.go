@@ -1,6 +1,7 @@
 package linkedlist
 
 import (
+	"fmt"
 	"strings"
 )
 
@@ -13,7 +14,7 @@ func Partition(node *Node, pivot string) *Node {
 
 	for node != nil {
 		next := node.Next
-		cmp := strings.Compare(node.Value, pivot)
+		cmp := strings.Compare(fmt.Sprintf("%v", node.Value), pivot)
 		if cmp < 0 {
 			if lTail == nil {
 				lTail = node

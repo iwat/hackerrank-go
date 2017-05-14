@@ -1,6 +1,7 @@
 package stacks
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/iwat/algorithms/linkedlist"
@@ -22,8 +23,9 @@ func (s *StackMin) Push(data string) {
 
 	min := data
 	if s.min != nil {
-		if strings.Compare(data, s.min.Value) > 0 {
-			min = s.min.Value
+		value := fmt.Sprintf("%v", s.min.Value)
+		if strings.Compare(data, value) > 0 {
+			min = value
 		}
 	}
 	oldMin := s.min
@@ -38,12 +40,12 @@ func (s *StackMin) Pop() string {
 	value := s.head.Value
 	s.head = s.head.Next
 	s.min = s.min.Next
-	return value
+	return fmt.Sprintf("%v", value)
 }
 
 func (s *StackMin) Min() string {
 	if s.min == nil {
 		return ""
 	}
-	return s.min.Value
+	return fmt.Sprintf("%v", s.min.Value)
 }

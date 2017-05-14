@@ -1,11 +1,15 @@
 package linkedlist
 
+import (
+	"fmt"
+)
+
 type Node struct {
-	Value string
+	Value interface{}
 	Next  *Node
 }
 
-func Create(value ...string) *Node {
+func Create(value ...interface{}) *Node {
 	if len(value) == 0 {
 		return nil
 	}
@@ -17,8 +21,8 @@ func Create(value ...string) *Node {
 
 func (n *Node) String() string {
 	if n.Next == nil {
-		return n.Value
+		return fmt.Sprintf("%v", n.Value)
 	} else {
-		return n.Value + " " + n.Next.String()
+		return fmt.Sprintf("%v %v", n.Value, n.Next.String())
 	}
 }
