@@ -1,4 +1,4 @@
-package main
+package statistics
 
 func WeightedMean(data []int, weight []int) float32 {
 	productSum := 0
