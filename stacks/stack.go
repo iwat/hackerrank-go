@@ -13,6 +13,9 @@ func NewStack() *Stack {
 }
 
 func (s *Stack) Peek() interface{} {
+	if s.head == nil {
+		return nil
+	}
 	return s.head.Value
 }
 
