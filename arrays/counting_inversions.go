@@ -1,9 +1,5 @@
 package arrays
 
-import (
-	"fmt"
-)
-
 // Counting inversion implements challenge from HackerRank.com
 //
 // https://www.hackerrank.com/challenges/ctci-merge-sort
@@ -23,20 +19,25 @@ func mergeSort(data []int) int {
 
 func merge(data []int) int {
 	swaps := 0
-	for {
-		swapped := false
-		for i := 1; i < len(data); i++ {
-			if data[i] < data[i-1] {
-				tmp := data[i]
-				data[i] = data[i-1]
-				data[i-1] = tmp
-				swaps++
-				swapped = true
-			}
-		}
-		if !swapped {
-			break
+	result := make([]int, 0, len(data))
+	left := data[:len(data)/2]
+	right := data[len(data)/2:]
+	for len(left) > 0 || len(right) > 0 {
+		if len(left) == 0 {
+			result = append(result, right[0])
+			right = right[1:]
+		} else if len(right) == 0 {
+			result = append(result, left[0])
+			left = left[1:]
+		} else if left[0] <= right[0] {
+			result = append(result, left[0])
+			left = left[1:]
+		} else {
+			result = append(result, right[0])
+			right = right[1:]
+			swaps += len(left)
 		}
 	}
+	copy(data, result)
 	return swaps
 }
