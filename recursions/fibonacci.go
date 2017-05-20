@@ -1,4 +1,4 @@
-package main
+package recursions
 
 func Fibonacci(a int) int {
 	if a == 0 {
