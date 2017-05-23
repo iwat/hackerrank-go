@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-const debug = true
+const debug = false
 
 type RunningMedian struct {
 	minHeap *Heap
@@ -47,8 +47,17 @@ func NewHeap(mode int) *Heap {
 }
 
 func (h *Heap) Add(value int) {
+	if debug {
+		fmt.Println(" +", value, h.data)
+	}
 	h.data = append(h.data, value)
+	if debug {
+		fmt.Println(" ?", value, h.data)
+	}
 	h.heapifyUp()
+	if debug {
+		fmt.Println("++", value, h.data)
+	}
 }
 
 func (h *Heap) Peek() int {
@@ -60,9 +69,18 @@ func (h *Heap) Peek() int {
 
 func (h *Heap) Poll() int {
 	head := h.data[0]
+	if debug {
+		fmt.Println(" -", head, h.data)
+	}
 	h.data[0] = h.data[len(h.data)-1]
 	h.data = h.data[:len(h.data)-1]
+	if debug {
+		fmt.Println(" ?", head, h.data)
+	}
 	h.heapifyDown()
+	if debug {
+		fmt.Println("--", head, h.data)
+	}
 	return head
 }
 
@@ -71,9 +89,6 @@ func (h *Heap) Size() int {
 }
 
 func (h *Heap) heapifyUp() {
-	if debug {
-		fmt.Println("heapifyUp(", h.mode, ")", h.data)
-	}
 	index := len(h.data) - 1
 	parent := (index - 1) / 2
 	for index > 0 {
@@ -84,32 +99,29 @@ func (h *Heap) heapifyUp() {
 		tmp := h.data[parent]
 		h.data[parent] = h.data[index]
 		h.data[index] = tmp
+		if debug {
+			fmt.Println("xx", parent, h.data[parent], "<->", index, h.data[index])
+		}
 
 		index = parent
 		parent = (index - 1) / 2
 	}
-	if debug {
-		fmt.Println("heapifiedUp(", h.mode, ")", h.data)
-	}
 }
 
 func (h *Heap) heapifyDown() {
-	if debug {
-		fmt.Println("heapifyDown(", h.mode, ")", h.data)
-	}
 	index := 0
 	left := index*2 + 1
 	right := index*2 + 2
 	for left < len(h.data) {
 		diffLeft := h.mode * (h.data[left] - h.data[index])
-		diffRight := 1000000
+		diffRight := 0
 		if right < len(h.data) {
 			diffRight = h.mode * (h.data[right] - h.data[index])
 		}
 		next := -1
-		if diffLeft < diffRight {
+		if diffLeft < 0 && diffLeft <= diffRight {
 			next = left
-		} else if diffRight < diffLeft {
+		} else if diffRight < 0 && diffRight <= diffLeft {
 			next = right
 		} else {
 			break
@@ -118,12 +130,13 @@ func (h *Heap) heapifyDown() {
 		tmp := h.data[next]
 		h.data[next] = h.data[index]
 		h.data[index] = tmp
+		if debug {
+			fmt.Println("xx", next, h.data[next], "<->", index, h.data[index])
+		}
+
 		index = next
 
 		left = index*2 + 1
 		right = index*2 + 2
-	}
-	if debug {
-		fmt.Println("heapifiedDown(", h.mode, ")", h.data)
 	}
 }
