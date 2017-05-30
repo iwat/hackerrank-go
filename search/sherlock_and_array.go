@@ -46,6 +46,6 @@ func SherlockAndArrayMain() {
 	var t int
 	fmt.Scanf("%d", &t)
 	for i := 0; i < t; i++ {
-		do()
+		SherlockAndArray()
 	}
 }
