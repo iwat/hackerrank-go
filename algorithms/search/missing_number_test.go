@@ -1,27 +1,44 @@
 package search
 
 import (
+	"bufio"
 	"bytes"
-	"io"
+	"fmt"
 	"os"
-	"strings"
 	"testing"
 )
 
 func TestMissingNumber(t *testing.T) {
 	in, _ := os.Open("testdata/missing_number.in.txt")
-	bin := new(bytes.Buffer)
-	io.Copy(bin, in)
-
 	out := new(bytes.Buffer)
 
+	bin := bufio.NewReader(in)
 	MissingNumber(bin, out)
 
-	exp, _ := os.Open("testdata/missing_number.exp.txt")
-	expBuf := new(bytes.Buffer)
-	io.Copy(expBuf, exp)
+	var val int
 
-	if strings.TrimSpace(expBuf.String()) != strings.TrimSpace(out.String()) {
-		t.Errorf("exp: %s, got: %s", expBuf.String(), out.String())
+	fmt.Fscanf(out, "%d", &val)
+	if val != 7251 {
+		t.Error("#0 != 7251")
+	}
+	fmt.Fscanf(out, "%d", &val)
+	if val != 7259 {
+		t.Error("#0 != 7259")
+	}
+	fmt.Fscanf(out, "%d", &val)
+	if val != 7276 {
+		t.Error("#0 != 7276")
+	}
+	fmt.Fscanf(out, "%d", &val)
+	if val != 7279 {
+		t.Error("#0 != 7279")
+	}
+	fmt.Fscanf(out, "%d", &val)
+	if val != 7292 {
+		t.Error("#0 != 7292")
+	}
+	fmt.Fscanf(out, "%d", &val)
+	if val != 7293 {
+		t.Error("#0 != 7293")
 	}
 }
